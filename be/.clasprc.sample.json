@@ -1,0 +1,14 @@
+{
+  "token": {
+    "access_token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "scope": "https://www.googleapis.com/auth/script.webapp.deploy",
+    "token_type": "Bearer",
+    "expiry_date": 1728160568916
+  },
+  "oauth2ClientSettings": {
+    "clientId": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "clientSecret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "redirectUri": "http://localhost"
+  },
+  "isLocalCreds": true
+}
