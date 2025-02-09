@@ -5,8 +5,10 @@ import CustomAppBar from "./AppBar";
 import CustomDrawer from "./Drawer";
 import CustomFloatingActionButton from "./FloatingActionButton";
 
-export default function AppLayout({ children }) {
+export default function AppLayout({ children, project, book }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const headerText = getHeaderText(project, book);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -28,7 +30,10 @@ export default function AppLayout({ children }) {
           flexDirection: "column",
         }}
       >
-        <CustomAppBar onMenuClick={toggleDrawer(true)} />
+        <CustomAppBar
+          onMenuClick={toggleDrawer(true)}
+          headerText={headerText}
+        />
         <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
         <Box component="main" sx={{ flexGrow: 1 }}>
           {children}
@@ -39,7 +44,15 @@ export default function AppLayout({ children }) {
   );
 }
 
+function getHeaderText(project, book) {
+  const headerText = (book || "all") + " - " + (project || "noproject");
+
+  return headerText;
+}
+
 // Add prop-type validation
 AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
+  project: PropTypes.string,
+  book: PropTypes.string,
 };
