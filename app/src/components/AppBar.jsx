@@ -2,7 +2,7 @@ import { AppBar, Toolbar, IconButton, Box, Typography } from "@mui/material";
 import { Menu, Search } from "@mui/icons-material";
 import PropTypes from "prop-types";
 
-export default function CustomAppBar({ onMenuClick, headerText }) {
+const CustomAppBar = ({ onMenuClick, headerText }) => {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -24,9 +24,11 @@ export default function CustomAppBar({ onMenuClick, headerText }) {
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 CustomAppBar.propTypes = {
   onMenuClick: PropTypes.func.isRequired,
-  headerText: PropTypes.string.isRequired,
+  headerText: PropTypes.string,
 };
+
+export { CustomAppBar };

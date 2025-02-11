@@ -1,14 +1,15 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
-import CustomAppBar from "./AppBar";
+import { CustomAppBar } from "./AppBar";
 import CustomDrawer from "./Drawer";
 import CustomFloatingActionButton from "./FloatingActionButton";
+import { HeaderTextProvider } from "../context/HeaderTextProvider";
 
-export default function AppLayout({ children, project, book }) {
+const AppLayout = ({ children, project, book, mode, id }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const headerText = getHeaderText(project, book);
+  const headerText = `${project}-${book}-${mode}-${id}`;
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -22,37 +23,37 @@ export default function AppLayout({ children, project, book }) {
 
   return (
     <>
-      <Box
-        sx={{
-          width: "100vw",
-          height: "100dvh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <CustomAppBar
-          onMenuClick={toggleDrawer(true)}
-          headerText={headerText}
-        />
-        <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
-        <Box component="main" sx={{ flexGrow: 1 }}>
-          {children}
+      <HeaderTextProvider>
+        <Box
+          sx={{
+            width: "100vw",
+            height: "100dvh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <CustomAppBar
+            onMenuClick={toggleDrawer(true)}
+            headerText={headerText}
+          />
+          <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
+          <Box component="main" sx={{ flexGrow: 1 }}>
+            {children}
+          </Box>
+          <CustomFloatingActionButton />
         </Box>
-        <CustomFloatingActionButton />
-      </Box>
+      </HeaderTextProvider>
     </>
   );
-}
-
-function getHeaderText(project, book) {
-  const headerText = (book || "all") + " - " + (project || "noproject");
-
-  return headerText;
-}
+};
 
 // Add prop-type validation
 AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  project: PropTypes.string,
+  project: PropTypes.string.isRequired,
   book: PropTypes.string,
+  mode: PropTypes.string,
+  id: PropTypes.string,
 };
+
+export { AppLayout };
