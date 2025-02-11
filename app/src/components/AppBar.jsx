@@ -1,10 +1,10 @@
 import { AppBar, Toolbar, IconButton, Box, Typography } from "@mui/material";
-import { Menu, Search } from "@mui/icons-material";
+import { Menu } from "@mui/icons-material";
 import PropTypes from "prop-types";
 
 const CustomAppBar = ({ onMenuClick, headerText }) => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "#2196f3" }}>
       <Toolbar>
         <IconButton
           edge="start"
@@ -14,13 +14,13 @@ const CustomAppBar = ({ onMenuClick, headerText }) => {
         >
           <Menu />
         </IconButton>
-        <Box sx={{ flexGrow: 1, textAlign: "center" }}>
-          <Typography variant="h6">{headerText}</Typography>
+        <Box sx={{ flexGrow: 1, textAlign: "left" }}>
+          <Typography variant="h8">{headerText}</Typography>
         </Box>
-        <Box sx={{ flexGrow: 1 }} />
-        <IconButton color="inherit" aria-label="search">
+        {/* <Box sx={{ flexGrow: 1 }} /> */}
+        {/* <IconButton color="inherit" aria-label="search">
           <Search />
-        </IconButton>
+        </IconButton> */}
       </Toolbar>
     </AppBar>
   );

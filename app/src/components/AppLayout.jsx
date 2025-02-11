@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 import { CustomAppBar } from "./AppBar";
 import CustomDrawer from "./Drawer";
-import CustomFloatingActionButton from "./FloatingActionButton";
 import { HeaderTextProvider } from "../context/HeaderTextProvider";
 
 const AppLayout = ({ children, project, book, mode, id }) => {
@@ -35,12 +34,20 @@ const AppLayout = ({ children, project, book, mode, id }) => {
           <CustomAppBar
             onMenuClick={toggleDrawer(true)}
             headerText={headerText}
+            position="fixed"
           />
           <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
-          <Box component="main" sx={{ flexGrow: 1 }}>
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              overflow: "auto",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             {children}
           </Box>
-          <CustomFloatingActionButton />
         </Box>
       </HeaderTextProvider>
     </>

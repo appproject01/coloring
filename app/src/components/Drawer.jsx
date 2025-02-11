@@ -21,7 +21,7 @@ export default function CustomDrawer({ open, onClose }) {
       >
         <Box
           sx={{
-            backgroundColor: "primary.main",
+            backgroundColor: "#2196f3",
             color: "white",
             padding: "16px",
             textAlign: "center",
