@@ -26,7 +26,7 @@ const AppLayout = ({ children, project, book, mode, id }) => {
         <Box
           sx={{
             width: "100vw",
-            height: "100dvh",
+            height: "100vh",
             display: "flex",
             flexDirection: "column",
           }}
