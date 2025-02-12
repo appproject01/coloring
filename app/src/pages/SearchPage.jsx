@@ -42,7 +42,16 @@ export default function Page() {
     <AppLayout project={project} book={book} mode={mode}>
       {isError && <p>Error: {errorText}</p>}
       {isLoading && <p>Loading...</p>}
-      <Box sx={{ padding: "16px" }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          mt: 7,
+          backgroundColor: "#f5f5f5",
+          width: "100vw",
+        }}
+      >
         <TextField
           fullWidth
           variant="outlined"

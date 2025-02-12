@@ -5,7 +5,7 @@ function Test101() {
 
 
 function Test102() {
-  const result = new GoogleDatabaseService().getImageById('image_files2/B-120-W-1-11_step10.png');
+  const result = new GoogleDatabaseService().getImageById('image_files3/D-4-6.jpg');
   const a = 1;
 }
 

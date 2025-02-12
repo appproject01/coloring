@@ -9,7 +9,7 @@ class GoogleDatabaseService {
 
     const searchColumnIndex = "A:A";
     const startStepsColumnIndex = 5;
-    const stepIncrement = 3;
+    const stepIncrement = 1;
     const sheet = SpreadsheetApp.openById(this.drawingSheetId).getSheetByName(this.worksheetName);
     const searchRange = sheet.getRange(searchColumnIndex);
     const searchResult = searchRange.createTextFinder(idValue).matchCase(true).matchEntireCell(true).findNext();
@@ -35,7 +35,6 @@ class GoogleDatabaseService {
         }
         stepObj["id"] = stepNo;
         stepObj["image"] = rowData[j];
-        stepObj["description"] = rowData[j + 1];
         stepData.push(stepObj);
         stepNo++;
       }
@@ -104,6 +103,27 @@ class GoogleDatabaseService {
     const file = DriveApp.getFileById(this.getFileIdByPath(idValue.trim()));
     const filename = file.getName();
     const base64 = Utilities.base64Encode(file.getBlob().getBytes());
+    const obj = {
+      id: idValue,
+      name: filename,
+      image: base64
+    };
+    return obj;
+  }
+
+
+  getResizedImageById(idValue) {
+    const file = DriveApp.getFileById(this.getFileIdByPath(idValue.trim()));
+    const filename = file.getName();
+
+    // Open the image blob
+    const imageBlob = file.getBlob();
+
+    // Resize the image
+    const resizedImageBlob = resizeImage(imageBlob, 500, 500); // Resize to 200x200 pixels (change as needed)
+
+    // Convert the resized image to base64
+    const base64 = Utilities.base64Encode(resizedImageBlob.getBytes());
     const obj = {
       id: idValue,
       name: filename,

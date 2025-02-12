@@ -20,26 +20,29 @@ const DefaultModeSelectionCard = ({ project, book, mode }) => {
   return (
     <Card
       sx={{
-        margin: "8px",
-        elevation: 10,
         flexGrow: 1,
-        height: "100%",
+        m: 2,
+        elevation: 10,
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        display: "flex", // Add this
+        flexDirection: "column", // Add this
       }}
     >
-      <CardActionArea onClick={() => navigate(`/${project}/${book}/${mode}`)}>
-        <CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Icon sx={{ fontSize: 96 }}>{icon}</Icon>
-            <Typography variant="h4">{subtitle}</Typography>
-          </Box>
+      <CardActionArea
+        onClick={() => navigate(`/${project}/${book}/${mode}`)}
+        sx={{ flexGrow: 1 }}
+      >
+        <CardContent
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon sx={{ fontSize: 96 }}>{icon}</Icon>
+          <Typography variant="h4">{subtitle}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

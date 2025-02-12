@@ -17,11 +17,12 @@ const WelcomePage = () => {
     <AppLayout project={project} book={book}>
       <Box
         sx={{
-          padding: "8px",
-          flex: 1,
+          flexGrow: 1,
           display: "flex",
           flexDirection: "column",
+          mt: 7,
           backgroundColor: "#f5f5f5",
+          width: "100vw",
         }}
       >
         {modeEntries.map(([mode]) => (

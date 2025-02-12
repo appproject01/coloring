@@ -18,6 +18,7 @@ class WebAPIRoutingService {
             ["drawing", this._getDrawing],
             ["sudoku", this._getSudoku],
             ["image", this._getImage],
+            ["resizedimage", this._getResizedImage],
 
             // Add more routes as needed
         ];
@@ -81,6 +82,17 @@ class WebAPIRoutingService {
         return dbService.getImageById(request.parameter.id);
 
     }
+
+    _getResizedImage(request) {
+
+        if (!request.parameter.id || request.parameter.id.length === 0)
+            throw new Error("Image id parameter is missing or blank");
+
+        const dbService = new GoogleDatabaseService();
+        return dbService.getResizedImageById(request.parameter.id);
+
+    }
+
 
 }
 

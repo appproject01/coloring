@@ -25,16 +25,14 @@ const AppLayout = ({ children, project, book, mode, id }) => {
       <HeaderTextProvider>
         <Box
           sx={{
-            width: "100vw",
-            height: "100vh",
             display: "flex",
             flexDirection: "column",
+            height: "100dvh",
           }}
         >
           <CustomAppBar
             onMenuClick={toggleDrawer(true)}
             headerText={headerText}
-            position="fixed"
           />
           <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
           <Box
@@ -43,6 +41,7 @@ const AppLayout = ({ children, project, book, mode, id }) => {
               flexGrow: 1,
               overflow: "auto",
               display: "flex",
+
               flexDirection: "column",
             }}
           >

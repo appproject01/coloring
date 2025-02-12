@@ -4,7 +4,13 @@ import PropTypes from "prop-types";
 
 const CustomAppBar = ({ onMenuClick, headerText }) => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#2196f3" }}>
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: "#2196f3",
+        // zIndex: (theme) => theme.zIndex.drawer + 1,
+      }}
+    >
       <Toolbar>
         <IconButton
           edge="start"
@@ -15,12 +21,10 @@ const CustomAppBar = ({ onMenuClick, headerText }) => {
           <Menu />
         </IconButton>
         <Box sx={{ flexGrow: 1, textAlign: "left" }}>
-          <Typography variant="h8">{headerText}</Typography>
+          <Typography variant="h6" noWrap component="div">
+            {headerText}
+          </Typography>
         </Box>
-        {/* <Box sx={{ flexGrow: 1 }} /> */}
-        {/* <IconButton color="inherit" aria-label="search">
-          <Search />
-        </IconButton> */}
       </Toolbar>
     </AppBar>
   );
