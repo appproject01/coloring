@@ -1,5 +1,5 @@
 function Test101() {
-  const result = new GoogleDatabaseService().getDrawingById('B-120-W-1-11');
+  const result = new GoogleDatabaseService().getSearchPuzzleById('B-1001-L-1-100');
   const a = 1;
 }
 
@@ -11,6 +11,6 @@ function Test102() {
 
 
 function Test103() {
-  const result = new GoogleDatabaseService().findDrawing('W-1', "", 0, 25);
+  const result = new GoogleDatabaseService().findSearchPuzzles('100', "", 0, 25);
   const a = 1;
 }

@@ -17,8 +17,9 @@ class WebAPIRoutingService {
         const routes = [
             ["drawing", this._getDrawing],
             ["sudoku", this._getSudoku],
+            ["searchpuzzle", this._getSearchPuzzle],
             ["image", this._getImage],
-            ["resizedimage", this._getResizedImage],
+
 
             // Add more routes as needed
         ];
@@ -49,7 +50,17 @@ class WebAPIRoutingService {
      */
     /******  90f9fe12-e7b1-4e30-bf39-d483c682baec  *******/
     _getSudoku(request) {
-        throw new Error("not implemented");
+        const dbService = new GoogleDatabaseService();
+
+        if (request.parameter.id != null) {
+            return dbService.getSudokuById(request.parameter.id);
+        } else {
+            let bookParam = request.parameter.book || "";
+            let queryParam = request.parameter.query || "";
+            let offsetParam = request.parameter.offset || 0;
+            let limitParam = request.parameter.limit || 20;
+            return dbService.findSudoku(queryParam, bookParam, offsetParam, limitParam);
+        }
     }
 
     /**
@@ -72,6 +83,21 @@ class WebAPIRoutingService {
         }
     }
 
+    _getSearchPuzzle(request) {
+        const dbService = new GoogleDatabaseService();
+
+        if (request.parameter.id != null) {
+            return dbService.getSearchPuzzleById(request.parameter.id);
+        } else {
+            let bookParam = request.parameter.book || "";
+            let queryParam = request.parameter.query || "";
+            let typeParam = request.parameter.type || "";
+            let offsetParam = request.parameter.offset || 0;
+            let limitParam = request.parameter.limit || 20;
+            return dbService.findSearchPuzzles(queryParam, bookParam, typeParam, offsetParam, limitParam);
+        }
+    }
+
 
     _getImage(request) {
 
@@ -80,16 +106,6 @@ class WebAPIRoutingService {
 
         const dbService = new GoogleDatabaseService();
         return dbService.getImageById(request.parameter.id);
-
-    }
-
-    _getResizedImage(request) {
-
-        if (!request.parameter.id || request.parameter.id.length === 0)
-            throw new Error("Image id parameter is missing or blank");
-
-        const dbService = new GoogleDatabaseService();
-        return dbService.getResizedImageById(request.parameter.id);
 
     }
 

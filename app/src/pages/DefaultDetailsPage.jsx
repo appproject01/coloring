@@ -1,6 +1,6 @@
 import { AppLayout } from "../components/AppLayout";
 import { DefaultCardLayout } from "../components/DefaultCardLayout";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useFetchSolution } from "../hooks/useFetchSolution";

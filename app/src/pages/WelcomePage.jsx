@@ -20,7 +20,7 @@ const WelcomePage = () => {
           flexGrow: 1,
           display: "flex",
           flexDirection: "column",
-          mt: 7,
+          //mt: 7,
           backgroundColor: "#f5f5f5",
           width: "100vw",
         }}

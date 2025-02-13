@@ -1,9 +1,8 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import { CustomAppBar } from "./AppBar";
 import CustomDrawer from "./Drawer";
-import { HeaderTextProvider } from "../context/HeaderTextProvider";
 
 const AppLayout = ({ children, project, book, mode, id }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -22,33 +21,33 @@ const AppLayout = ({ children, project, book, mode, id }) => {
 
   return (
     <>
-      <HeaderTextProvider>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100dvh",
+        }}
+      >
+        <CustomAppBar
+          onMenuClick={toggleDrawer(true)}
+          headerText={headerText}
+          mode={mode}
+        />
+        <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
+        <LinearProgress sx={{ width: "100%", mt: 7 }} />
         <Box
+          component="main"
           sx={{
+            flexGrow: 1,
+            overflow: "auto",
             display: "flex",
+            //mt: 7,
             flexDirection: "column",
-            height: "100dvh",
           }}
         >
-          <CustomAppBar
-            onMenuClick={toggleDrawer(true)}
-            headerText={headerText}
-          />
-          <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              overflow: "auto",
-              display: "flex",
-
-              flexDirection: "column",
-            }}
-          >
-            {children}
-          </Box>
+          {children}
         </Box>
-      </HeaderTextProvider>
+      </Box>
     </>
   );
 };
