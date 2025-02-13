@@ -7,13 +7,16 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { projectModeMap } from "./projectModeMap";
+import { projectModeMap } from "./ProjectModeMap";
 
 const DefaultModeSelectionCard = ({ project, book, mode }) => {
   const navigate = useNavigate();
   //   const { data: preloadedData } = useFetchSearchResults("", book);
 
-  const { icon, subtitle } = projectModeMap[project][mode];
+  const { icon, subtitle } = projectModeMap[project]?.[mode] ?? {
+    icon: "",
+    subtitle: "",
+  };
   //const a = 1;
 
   return (

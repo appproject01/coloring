@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 //import useFetchSearchResults from "../hooks/useFetchSearchResults";
 import { DefaultModeSelectionCard } from "../components/DefaultModeSelectionCard";
-import { projectModeMap } from "../components/projectModeMap";
+import { projectModeMap } from "../components/ProjectModeMap";
 
 const WelcomePage = () => {
   const { project, book } = useParams();
 
   // const { data: preloadedData } = useFetchSearchResults("", book);
-  const modes = projectModeMap[project];
+  const modes = projectModeMap[project] ?? {};
   const modeEntries = Object.entries(modes);
 
   return (

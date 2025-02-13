@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { Box, LinearProgress } from "@mui/material";
 import { CustomAppBar } from "./AppBar";
 import CustomDrawer from "./Drawer";
+import { heading1Map, projectModeMap } from "../components/ProjectModeMap";
 
 const AppLayout = ({ children, project, book, mode, id }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const headerText = `${project}-${book}-${mode}-${id}`;
+  const headerText = getHeaderText(project, book, mode, id);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -51,6 +52,46 @@ const AppLayout = ({ children, project, book, mode, id }) => {
     </>
   );
 };
+
+function getHeaderText(project, book, mode, id) {
+  // function to clean the id from prefix
+  const cleanId = (str) => {
+    const parts = str.split("-");
+    if (parts.length > 2) {
+      return parts.slice(2).join("-");
+    }
+    return "";
+  };
+
+  //  expression to convert book to UI text
+  const bookToShow = book
+    ? book === "all"
+      ? "all books"
+      : String(book).replace(/_/g, " ")
+    : "";
+
+  if (project && book && mode && id) {
+    // details page header
+    const header = projectModeMap[project]?.[mode]?.heading3 ?? "";
+    return `${header} ${cleanId(id)} (${bookToShow})`;
+  }
+
+  if (project && book && mode) {
+    // search page header
+    const header = projectModeMap[project]?.[mode]?.heading2 ?? "";
+    return `${header}: ${bookToShow}`;
+  }
+
+  if (project) {
+    // start page header
+    const header = heading1Map[project];
+    return header
+      ? `${header}: ${bookToShow}`
+      : `Unsupported project: ${project}`;
+  }
+
+  return `Unsupported project: ${project}`;
+}
 
 // Add prop-type validation
 AppLayout.propTypes = {
