@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Icon,
-  Typography,
-} from "@mui/material";
+import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { projectModeMap } from "./ProjectModeMap";
@@ -13,9 +7,9 @@ const DefaultModeSelectionCard = ({ project, book, mode }) => {
   const navigate = useNavigate();
   //   const { data: preloadedData } = useFetchSearchResults("", book);
 
-  const { icon, subtitle } = projectModeMap[project]?.[mode] ?? {
-    icon: "",
+  const { subtitle, muiicon: MuiIcon } = projectModeMap[project]?.[mode] ?? {
     subtitle: "",
+    muiicon: null,
   };
   //const a = 1;
 
@@ -40,11 +34,12 @@ const DefaultModeSelectionCard = ({ project, book, mode }) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
           }}
         >
-          <Icon sx={{ fontSize: 96 }}>{icon}</Icon>
-          <Typography variant="h4">{subtitle}</Typography>
+          {MuiIcon && <MuiIcon sx={{ fontSize: 128 }} />}
+          <Typography variant="h6" textAlign={"center"}>
+            {subtitle}
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -58,3 +53,7 @@ DefaultModeSelectionCard.propTypes = {
   book: PropTypes.string.isRequired,
   mode: PropTypes.string.isRequired,
 };
+
+{
+  /* <Icon sx={{ fontSize: 96 }}>{icon}</Icon> */
+}

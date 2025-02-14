@@ -5,7 +5,14 @@ import { CustomAppBar } from "./AppBar";
 import CustomDrawer from "./Drawer";
 import { heading1Map, projectModeMap } from "../components/ProjectModeMap";
 
-const AppLayout = ({ children, project, book, mode, id }) => {
+const AppLayout = ({
+  children,
+  project,
+  book,
+  mode,
+  id,
+  isLoading = false,
+}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const headerText = getHeaderText(project, book, mode, id);
@@ -29,20 +36,29 @@ const AppLayout = ({ children, project, book, mode, id }) => {
           height: "100dvh",
         }}
       >
-        <CustomAppBar
-          onMenuClick={toggleDrawer(true)}
-          headerText={headerText}
-          mode={mode}
-        />
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <CustomAppBar
+            onMenuClick={toggleDrawer(true)}
+            headerText={headerText}
+            mode={mode}
+          />
+          <LinearProgress
+            sx={{
+              width: "100%",
+              //mt: 8,
+              visibility: isLoading ? "visible" : "hidden",
+            }}
+          />
+        </Box>
         <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
-        <LinearProgress sx={{ width: "100%", mt: 7 }} />
+
         <Box
           component="main"
           sx={{
             flexGrow: 1,
             overflow: "auto",
             display: "flex",
-            //mt: 7,
+            // mt: 8,
             flexDirection: "column",
           }}
         >
@@ -100,6 +116,7 @@ AppLayout.propTypes = {
   book: PropTypes.string,
   mode: PropTypes.string,
   id: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 export { AppLayout };

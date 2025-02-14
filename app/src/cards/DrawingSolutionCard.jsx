@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
 import PropTypes from "prop-types";
 import { useFetchImage } from "../hooks/useFetchImage";
 
-const SearchPuzzleWordCard = ({ stepData }) => {
+const DrawingSolutionCard = ({ stepData }) => {
   const {
     data: imageData,
     isLoading,
@@ -56,8 +56,8 @@ const SearchPuzzleWordCard = ({ stepData }) => {
   );
 };
 
-SearchPuzzleWordCard.propTypes = {
+DrawingSolutionCard.propTypes = {
   stepData: PropTypes.object.isRequired,
 };
 
-export { SearchPuzzleWordCard };
+export { DrawingSolutionCard };

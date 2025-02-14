@@ -1,4 +1,10 @@
 import SomeComponent from "./FloatingActionButton";
+import {
+  Filter9Plus,
+  TextRotationNone,
+  QuestionAnswer,
+  SettingsSuggest,
+} from "@mui/icons-material";
 
 const projectModeMap = {
   drawing: {
@@ -8,6 +14,9 @@ const projectModeMap = {
       component: <SomeComponent />,
       heading2: "Inspire",
       heading3: "Drawing",
+      listName: "Drawing",
+      placeholder: "Type a drawing ID (example: D-1)...",
+      muiicon: SettingsSuggest,
     },
     answer: {
       icon: "F",
@@ -15,6 +24,9 @@ const projectModeMap = {
       component: <SomeComponent />,
       heading2: "Inspire",
       heading3: "Artwork",
+      listName: "Artwork",
+      placeholder: "Type a drawing ID (example: D-1)...",
+      muiicon: QuestionAnswer,
     },
   },
   sudoku: {
@@ -24,6 +36,9 @@ const projectModeMap = {
       component: <SomeComponent />,
       heading2: "Solutions",
       heading3: "Solution",
+      listName: "Puzzle",
+      placeholder: "Type a puzzle ID (example: L-1-1)...",
+      muiicon: SettingsSuggest,
     },
     answer: {
       icon: "A",
@@ -31,6 +46,9 @@ const projectModeMap = {
       component: <SomeComponent />,
       heading2: "Answers",
       heading3: "Answer",
+      listName: "Puzzle",
+      placeholder: "Type a puzzle ID (example: L-1-1)...",
+      muiicon: QuestionAnswer,
     },
   },
   searchpuzzle: {
@@ -40,6 +58,9 @@ const projectModeMap = {
       component: <SomeComponent />,
       heading2: "Word Search",
       heading3: "Solution",
+      listName: "Puzzle",
+      placeholder: "Type a puzzle ID (example: W-1-1)...",
+      muiicon: TextRotationNone,
     },
     number: {
       icon: "N",
@@ -47,6 +68,9 @@ const projectModeMap = {
       component: <SomeComponent />,
       heading2: "Number Search",
       heading3: "Solution",
+      listName: "Puzzle",
+      placeholder: "Type a puzzle ID (example: N-1-1)...",
+      muiicon: Filter9Plus,
     },
   },
 };

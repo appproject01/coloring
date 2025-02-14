@@ -7,7 +7,8 @@ const CustomAppBar = ({ onMenuClick, headerText, mode }) => {
   const navigate = useNavigate();
   return (
     <AppBar
-      position="fixed"
+      //position="fixed"
+      position="relative"
       sx={{
         backgroundColor: "#2196f3",
         // zIndex: (theme) => theme.zIndex.drawer + 1,
