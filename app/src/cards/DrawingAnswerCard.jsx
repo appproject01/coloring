@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
 import PropTypes from "prop-types";
-import { useFetchImage, useState } from "../hooks/useFetchImage";
+import { useFetchImage } from "../hooks/useFetchImage";
 
 const DrawingAnswerCard = ({ data }) => {
   const {
@@ -10,57 +10,17 @@ const DrawingAnswerCard = ({ data }) => {
     errorText,
   } = useFetchImage(data.artwork ?? "");
 
-  const [imageHeight, setImageHeight] = useState(500);
+  // const [imageHeight, setImageHeight] = useState(500);
 
   const getFileExtension = (filename) => {
     return filename.split(".").pop().toLowerCase();
   };
 
-  const handleImageLoad = (event) => {
-    setImageHeight(event.target.naturalHeight);
-  };
+  // const handleImageLoad = (event) => {
+  //   setImageHeight(event.target.naturalHeight);
+  // };
 
   return (
-    // <Card
-    //   sx={{
-    //     margin: 2,
-    //     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center", // Center align the content
-    //   }}
-    // >
-    //   {isError && <p>Error: {errorText}</p>}
-    //   {isLoading ? (
-    //     <Skeleton variant="rectangular" width="100%" height={500} />
-    //   ) : (
-    //     imageData && (
-    //       <>
-    //         <Box
-    //           component="img"
-    //           sx={{
-    //             width: "100%",
-    //             height: "auto",
-
-    //             //maxHeight: 200, // Resize to fit within the card
-    //             objectFit: "contain", // Ensure the aspect ratio is maintained
-    //           }}
-    //           src={`data:image/${getFileExtension(imageData.name)};base64,${
-    //             imageData.image
-    //           }`}
-    //           alt={"Drawing " + data.id}
-    //         />
-    //         <CardContent>
-    //           <Typography
-    //             component="div"
-    //             dangerouslySetInnerHTML={{ __html: data.description }}
-    //           />
-    //         </CardContent>
-    //       </>
-    //     )
-    //   )}
-    // </Card>
-
     <Card
       sx={{
         margin: 2,
@@ -71,25 +31,18 @@ const DrawingAnswerCard = ({ data }) => {
       }}
     >
       {isError && <p>Error: {errorText}</p>}
-      <Box
-        sx={{
-          width: "100%",
-          height: 500, // Ensure consistent height
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#f5f5f5", // Background color for the box
-        }}
-      >
-        {isLoading ? (
-          <Skeleton variant="rectangular" width="100%" height={500} />
-        ) : (
-          imageData && (
+      {isLoading ? (
+        <Skeleton variant="rectangular" width="100%" height={500} />
+      ) : (
+        imageData && (
+          <>
             <Box
               component="img"
               sx={{
                 width: "100%",
-                //height: "auto",
+                height: "auto",
+
+                //maxHeight: 200, // Resize to fit within the card
                 objectFit: "contain", // Ensure the aspect ratio is maintained
               }}
               src={`data:image/${getFileExtension(imageData.name)};base64,${
@@ -97,16 +50,63 @@ const DrawingAnswerCard = ({ data }) => {
               }`}
               alt={"Drawing " + data.id}
             />
-          )
-        )}
-      </Box>
-      <CardContent>
-        <Typography
-          component="div"
-          dangerouslySetInnerHTML={{ __html: data.description }}
-        />
-      </CardContent>
+            <CardContent>
+              <Typography
+                component="div"
+                dangerouslySetInnerHTML={{ __html: data.description }}
+              />
+            </CardContent>
+          </>
+        )
+      )}
     </Card>
+
+    // <Card
+    //   sx={{
+    //     margin: 2,
+    //     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     alignItems: "center", // Center align the content
+    //   }}
+    // >
+    //   {isError && <p>Error: {errorText}</p>}
+    //   <Box
+    //     sx={{
+    //       width: "100%",
+    //       height: 500, // Ensure consistent height
+    //       display: "flex",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //       backgroundColor: "#f5f5f5", // Background color for the box
+    //     }}
+    //   >
+    //     {isLoading ? (
+    //       <Skeleton variant="rectangular" width="100%" height={500} />
+    //     ) : (
+    //       imageData && (
+    //         <Box
+    //           component="img"
+    //           sx={{
+    //             width: "100%",
+    //             //height: "auto",
+    //             objectFit: "contain", // Ensure the aspect ratio is maintained
+    //           }}
+    //           src={`data:image/${getFileExtension(imageData.name)};base64,${
+    //             imageData.image
+    //           }`}
+    //           alt={"Drawing " + data.id}
+    //         />
+    //       )
+    //     )}
+    //   </Box>
+    //   <CardContent>
+    //     <Typography
+    //       component="div"
+    //       dangerouslySetInnerHTML={{ __html: data.description }}
+    //     />
+    //   </CardContent>
+    // </Card>
   );
 };
 
