@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 //import useFetchSearchResults from "../hooks/useFetchSearchResults";
 import { DefaultModeSelectionCard } from "../components/DefaultModeSelectionCard";
 import { projectModeMap } from "../components/ProjectModeMap";
+import { useApplicationContext } from "../context/ApplicationContext";
+import useFetchSearchResults from "../hooks/useFetchSearchResults";
+import { useEffect } from "react";
 
 const WelcomePage = () => {
   const { project, book } = useParams();
@@ -12,6 +15,19 @@ const WelcomePage = () => {
   // const { data: preloadedData } = useFetchSearchResults("", book);
   const modes = projectModeMap[project] ?? {};
   const modeEntries = Object.entries(modes);
+
+  const { context, setContext } = useApplicationContext();
+
+  // preload default search results to load next page faster
+  const { data } = useFetchSearchResults("", book);
+
+  useEffect(() => {
+    if (!context.result || context.result.length === 0) {
+      if (data && data.length > 0) {
+        setContext({ searchQuery: "", results: data });
+      }
+    }
+  }, [data]);
 
   return (
     <AppLayout project={project} book={book}>

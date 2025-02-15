@@ -60,53 +60,6 @@ const DrawingAnswerCard = ({ data }) => {
         )
       )}
     </Card>
-
-    // <Card
-    //   sx={{
-    //     margin: 2,
-    //     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center", // Center align the content
-    //   }}
-    // >
-    //   {isError && <p>Error: {errorText}</p>}
-    //   <Box
-    //     sx={{
-    //       width: "100%",
-    //       height: 500, // Ensure consistent height
-    //       display: "flex",
-    //       justifyContent: "center",
-    //       alignItems: "center",
-    //       backgroundColor: "#f5f5f5", // Background color for the box
-    //     }}
-    //   >
-    //     {isLoading ? (
-    //       <Skeleton variant="rectangular" width="100%" height={500} />
-    //     ) : (
-    //       imageData && (
-    //         <Box
-    //           component="img"
-    //           sx={{
-    //             width: "100%",
-    //             //height: "auto",
-    //             objectFit: "contain", // Ensure the aspect ratio is maintained
-    //           }}
-    //           src={`data:image/${getFileExtension(imageData.name)};base64,${
-    //             imageData.image
-    //           }`}
-    //           alt={"Drawing " + data.id}
-    //         />
-    //       )
-    //     )}
-    //   </Box>
-    //   <CardContent>
-    //     <Typography
-    //       component="div"
-    //       dangerouslySetInnerHTML={{ __html: data.description }}
-    //     />
-    //   </CardContent>
-    // </Card>
   );
 };
 
