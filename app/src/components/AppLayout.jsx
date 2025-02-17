@@ -50,7 +50,11 @@ const AppLayout = ({
             }}
           />
         </Box>
-        <CustomDrawer open={drawerOpen} onClose={toggleDrawer(false)} />
+        <CustomDrawer
+          open={drawerOpen}
+          onClose={toggleDrawer(false)}
+          project={project}
+        />
 
         <Box
           component="main"

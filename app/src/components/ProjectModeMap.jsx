@@ -81,4 +81,24 @@ const heading1Map = {
   searchpuzzle: "Word Search Puzzles",
 };
 
-export { projectModeMap, heading1Map };
+const projectMap = {
+  drawing: {
+    drawerAppTitle: "Artwork Books",
+    drawerDescription: "Answers and step-by-step mode for Artwork books",
+    drawerSignature: "Guy Narcisse Fotso Tasse",
+  },
+  sudoku: {
+    drawerAppTitle: "Sudoku Solutions",
+    drawerDescription:
+      "Answers and step-by-step solutions for Sudoku Puzzle books",
+    drawerSignature: "Guy Narcisse Fotso Tasse",
+  },
+  searchpuzzle: {
+    drawerAppTitle: "Word Search Solutions",
+    drawerDescription:
+      "Answers and step-by-step solutions for Word Search Puzzle books",
+    drawerSignature: "Guy Narcisse Fotso Tasse",
+  },
+};
+
+export { projectModeMap, heading1Map, projectMap };
