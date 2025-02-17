@@ -1,6 +1,6 @@
 import React from "react";
 import { AppLayout } from "../components/AppLayout";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetchSearchResults from "../hooks/useFetchSearchResults";
 import {
@@ -24,7 +24,11 @@ export default function Page() {
   const navigate = useNavigate();
 
   const { context, setContext } = useApplicationContext();
-  const { searchQuery: contextSearchQuery, results: contextResults } = context;
+  const {
+    searchQuery: contextSearchQuery,
+    results: contextResults,
+    limit: contextLimit,
+  } = context;
 
   const [searchQuery, setSearchQuery] = useState(() => {
     return contextSearchQuery || "";
@@ -34,14 +38,20 @@ export default function Page() {
     return contextResults || [];
   });
 
+  const [limit, setLimit] = useState(contextLimit || 20);
+
   const { data, isLoading, isError, errorText } = useFetchSearchResults(
     debouncedQuery,
-    book
+    book,
+    limit
   );
+
+  const resultsContainerRef = useRef(null);
 
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedQuery(searchQuery);
+      setLimit(20);
     }, 950); // 950ms debounce delay
 
     return () => {
@@ -52,9 +62,30 @@ export default function Page() {
   useEffect(() => {
     if (data) {
       setResults(data);
-      setContext({ searchQuery: debouncedQuery, results: data });
+      setContext({ searchQuery: debouncedQuery, results: data, limit });
     }
   }, [data]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } =
+        resultsContainerRef.current;
+      if (scrollTop + clientHeight >= scrollHeight - 20) {
+        setLimit((prevLimit) => prevLimit + 20);
+      }
+    };
+
+    const resultsContainer = resultsContainerRef.current;
+    if (resultsContainer) {
+      resultsContainer.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (resultsContainer) {
+        resultsContainer.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -63,6 +94,7 @@ export default function Page() {
   const handleClearSearch = () => {
     setDebouncedQuery("");
     setSearchQuery("");
+    setLimit(20);
   };
 
   const handleCardClick = (id, book) => {
@@ -104,6 +136,7 @@ export default function Page() {
           }}
         />
         <Box
+          ref={resultsContainerRef}
           sx={{
             flexGrow: 1,
             overflow: "auto", // Enable scrolling for the results

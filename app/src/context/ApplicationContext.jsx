@@ -6,6 +6,7 @@ const ApplicationContext = createContext();
 export const ApplicationProvider = ({ children }) => {
   const [context, setContext] = useState({
     searchQuery: "",
+    limit: 20,
     results: [],
   });
 

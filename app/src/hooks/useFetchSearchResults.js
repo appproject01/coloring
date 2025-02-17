@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
 import { fetchApiUrl } from './apiUrl';
 
-const useFetchSearchResults = (query, book) => {
-    const [data, setData] = useState(null); // Initialize with preloadedData
+const useFetchSearchResults = (query, book, limit = 20) => {
+    const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [errorText, setErrorText] = useState("");
 
     useEffect(() => {
-        // If preloadedData has length > 0, skip fetching
-        // if (preloadedData.length > 0) {
-        //     return;
-        // }
 
         const { apiUrl, error } = fetchApiUrl();
 
@@ -30,9 +26,10 @@ const useFetchSearchResults = (query, book) => {
 
                 const bookForQuery = book === "all" ? "" : book.replace(/_/g, " ");
                 const objectParam = '?o=drawing';
+                const limitParam = `&limit=${limit}`;
                 const bookParam = bookForQuery && bookForQuery.length > 0 ? `&book=${bookForQuery}` : "";
                 const queryParam = query && query.length > 0 ? `&query=${query}` : "";
-                const fullUrl = `${apiUrl}${objectParam}${bookParam}${queryParam}`;
+                const fullUrl = `${apiUrl}${objectParam}${bookParam}${queryParam}${limitParam}`;
 
                 const response = await fetch(fullUrl);
                 const apiData = await response.json();
@@ -46,7 +43,7 @@ const useFetchSearchResults = (query, book) => {
         };
 
         fetchData();
-    }, [query, book]);
+    }, [query, book, limit]);
 
     return { data, isLoading, isError, errorText };
 };
