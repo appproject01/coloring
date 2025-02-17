@@ -19,7 +19,7 @@ const WelcomePage = () => {
   const { context, setContext } = useApplicationContext();
 
   // preload default search results to load next page faster
-  const { data } = useFetchSearchResults("", book);
+  const { data } = useFetchSearchResults("", project, book);
 
   useEffect(() => {
     if (!context.result || context.result.length === 0) {

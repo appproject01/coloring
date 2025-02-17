@@ -42,6 +42,7 @@ export default function Page() {
 
   const { data, isLoading, isError, errorText } = useFetchSearchResults(
     debouncedQuery,
+    project,
     book,
     limit
   );

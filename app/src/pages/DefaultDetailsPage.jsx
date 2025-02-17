@@ -6,11 +6,13 @@ import { useParams } from "react-router-dom";
 import { useFetchSolution } from "../hooks/useFetchSolution";
 import { DrawingSolutionCard } from "../cards/DrawingSolutionCard";
 import { DrawingAnswerCard } from "../cards/DrawingAnswerCard";
+import { SudokuSolutionCard } from "../cards/SudokuSolutionCard";
+import { SudokuAnswerCard } from "../cards/SudokuAnswerCard";
 
 const DefaultDetailsPage = () => {
   const { project, book, mode, id } = useParams();
 
-  const { data, isLoading, isError, errorText } = useFetchSolution(id);
+  const { data, isLoading, isError, errorText } = useFetchSolution(project, id);
 
   return (
     <AppLayout
@@ -36,6 +38,10 @@ const layoutFunctions = {
   drawing: {
     solution: getDrawingSolutionLayout,
     answer: getDrawingAnswerLayout,
+  },
+  sudoku: {
+    solution: getSudokuSolutionLayout,
+    answer: getSudokuAnswerLayout,
   },
 };
 
@@ -67,6 +73,36 @@ function getDrawingSolutionLayout(data) {
         </DefaultCardLayout>
       )}
     </>
+  );
+}
+
+function getSudokuSolutionLayout(data) {
+  return (
+    <>
+      {data?.steps?.length > 0 && (
+        <DefaultCardLayout>
+          {data.steps.map((step, index) => (
+            <SudokuSolutionCard stepData={step} key={index} />
+          ))}
+        </DefaultCardLayout>
+      )}
+    </>
+  );
+}
+
+function getSudokuAnswerLayout(data) {
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+
+        p: 2,
+      }}
+    >
+      {data && <SudokuAnswerCard data={data} />}
+    </Box>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchApiUrl } from './apiUrl';
 
-const useFetchSolution = (id) => {
+const useFetchSolution = (project, id) => {
     const [data, setData] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -24,7 +24,7 @@ const useFetchSolution = (id) => {
             setErrorText("");
 
             try {
-                const objectParam = '?o=drawing';
+                const objectParam = `?o=${project}`;
                 const idParam = `&id=${id}`;
                 const fullUrl = `${apiUrl}${objectParam}${idParam}`;
 

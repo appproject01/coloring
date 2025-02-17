@@ -4,6 +4,8 @@ import {
   TextRotationNone,
   QuestionAnswer,
   SettingsSuggest,
+  BurstMode,
+  Vrpano,
 } from "@mui/icons-material";
 
 const projectModeMap = {
@@ -16,7 +18,7 @@ const projectModeMap = {
       heading3: "Drawing",
       listName: "Drawing",
       placeholder: "Type a drawing ID (example: D-1)...",
-      muiicon: SettingsSuggest,
+      muiicon: BurstMode,
     },
     answer: {
       icon: "F",
@@ -26,7 +28,7 @@ const projectModeMap = {
       heading3: "Artwork",
       listName: "Artwork",
       placeholder: "Type a drawing ID (example: D-1)...",
-      muiicon: QuestionAnswer,
+      muiicon: Vrpano,
     },
   },
   sudoku: {
