@@ -14,3 +14,18 @@ function Test103() {
   const result = new GoogleDatabaseService().findSearchPuzzles('100', "", 0, 25);
   const a = 1;
 }
+
+
+function Test104() {
+  const result = new GoogleDatabaseService().getDrawingById('B-121-D-3-25');
+  const a = 1;
+}
+
+function Test105() {
+  const result = new GoogleDatabaseService().getObjectById('B-200-L-2-420');
+  const a = 1;
+}
+
+
+
+

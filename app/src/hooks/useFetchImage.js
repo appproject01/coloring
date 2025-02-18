@@ -30,6 +30,9 @@ const useFetchImage = (id) => {
 
                 const response = await fetch(fullUrl);
                 const apiData = await response.json();
+                if (apiData.error && apiData.error.length > 0) {
+                    throw new Error(apiData.error);
+                }
                 setData(apiData);
             } catch (error) {
                 setIsError(true);
