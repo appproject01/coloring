@@ -31,18 +31,24 @@ const DrawingAnswerCard = ({ data }) => {
       }}
     >
       {isError && <p>Error: {errorText}</p>}
-      {isLoading ? (
-        <Skeleton variant="rectangular" width="100%" height={500} />
-      ) : (
-        imageData && (
-          <>
+      <Box
+        sx={{
+          width: "100%",
+          height: isLoading ? 400 : "auto",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {isLoading ? (
+          <Skeleton variant="rectangular" width="100%" height="100%" />
+        ) : (
+          imageData && (
             <Box
               component="img"
               sx={{
                 width: "100%",
                 height: "auto",
-
-                //maxHeight: 200, // Resize to fit within the card
                 objectFit: "contain", // Ensure the aspect ratio is maintained
               }}
               src={`data:image/${getFileExtension(imageData.name)};base64,${
@@ -50,15 +56,15 @@ const DrawingAnswerCard = ({ data }) => {
               }`}
               alt={"Drawing " + data.id}
             />
-            <CardContent>
-              <Typography
-                component="div"
-                dangerouslySetInnerHTML={{ __html: data.description }}
-              />
-            </CardContent>
-          </>
-        )
-      )}
+          )
+        )}
+      </Box>
+      <CardContent>
+        <Typography
+          component="div"
+          dangerouslySetInnerHTML={{ __html: data.description }}
+        />
+      </CardContent>
     </Card>
   );
 };
